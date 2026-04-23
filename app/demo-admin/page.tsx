@@ -70,15 +70,6 @@ const initialLeads: Lead[] = [
 
 const initialPartners: Partner[] = [
   {
-    const chartData = [
-  { label: "Seg", value: 8 },
-  { label: "Ter", value: 12 },
-  { label: "Qua", value: 10 },
-  { label: "Qui", value: 15 },
-  { label: "Sex", value: 18 },
-  { label: "Sáb", value: 9 },
-  { label: "Dom", value: 6 },
-];
     id: 1,
     company: "Scalvo",
     category: "Marketing / Vendas",
@@ -116,6 +107,16 @@ const initialPartners: Partner[] = [
     country: "Portugal",
     status: "Pendente",
   },
+];
+
+const chartData = [
+  { label: "Seg", value: 8 },
+  { label: "Ter", value: 12 },
+  { label: "Qua", value: 10 },
+  { label: "Qui", value: 15 },
+  { label: "Sex", value: 18 },
+  { label: "Sáb", value: 9 },
+  { label: "Dom", value: 6 },
 ];
 
 type TabKey = "overview" | "partners" | "leads" | "clients";
@@ -234,81 +235,14 @@ export default function DemoAdminPage() {
         )}
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-  <MetricCard label="Parceiros aprovados" value={approvedPartners} />
-  <MetricCard label="Parceiros pendentes" value={pendingPartners} />
-  <MetricCard label="Leads em aberto" value={openLeads} />
-  <MetricCard label="Leads fechados" value={closedLeads} />
-  <MetricCard label="Pipeline estimado" value="€18.400" />
-</div>
+          <MetricCard label="Parceiros aprovados" value={approvedPartners} />
+          <MetricCard label="Parceiros pendentes" value={pendingPartners} />
+          <MetricCard label="Leads em aberto" value={openLeads} />
+          <MetricCard label="Leads fechados" value={closedLeads} />
+          <MetricCard label="Pipeline estimado" value="€18.400" />
+        </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-            <div className="mt-8 grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
-  <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6">
-    <div className="mb-6 flex items-center justify-between">
-      <div>
-        <h3 className="text-2xl font-semibold">Resumo executivo</h3>
-        <p className="mt-1 text-sm text-white/50">
-          Visão rápida da operação da plataforma
-        </p>
-      </div>
-      <span className="rounded-full border border-yellow-400/20 bg-yellow-400/10 px-3 py-1 text-xs text-yellow-300">
-        Atualizado hoje
-      </span>
-    </div>
-
-    <div className="grid gap-4 md:grid-cols-2">
-      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-        <p className="text-sm text-white/50">Categoria com mais procura</p>
-        <p className="mt-2 text-2xl font-bold text-yellow-400">
-          Marketing / Vendas
-        </p>
-      </div>
-
-      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-        <p className="text-sm text-white/50">Parceiro com mais leads</p>
-        <p className="mt-2 text-2xl font-bold text-yellow-400">Scalvo</p>
-      </div>
-
-      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-        <p className="text-sm text-white/50">Taxa de aprovação</p>
-        <p className="mt-2 text-2xl font-bold text-yellow-400">84%</p>
-      </div>
-
-      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-        <p className="text-sm text-white/50">Tempo médio de resposta</p>
-        <p className="mt-2 text-2xl font-bold text-yellow-400">18 min</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6">
-    <div className="mb-6 flex items-center justify-between">
-      <div>
-        <h3 className="text-2xl font-semibold">Leads na semana</h3>
-        <p className="mt-1 text-sm text-white/50">
-          Visualização simplificada de evolução
-        </p>
-      </div>
-      <span className="text-sm text-white/50">Últimos 7 dias</span>
-    </div>
-
-    <div className="flex h-[260px] items-end justify-between gap-3">
-      {chartData.map((item) => (
-        <div
-          key={item.label}
-          className="flex flex-1 flex-col items-center justify-end"
-        >
-          <div className="mb-3 text-xs text-white/50">{item.value}</div>
-          <div
-            className="w-full rounded-t-2xl bg-gradient-to-t from-yellow-500 to-yellow-300"
-            style={{ height: ${item.value * 10}px }}
-          />
-          <div className="mt-3 text-xs text-white/50">{item.label}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
           <TabButton
             active={tab === "overview"}
             onClick={() => setTab("overview")}
@@ -332,83 +266,153 @@ export default function DemoAdminPage() {
         </div>
 
         {tab === "overview" && (
-          <div className="mt-8 grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-5 flex items-center justify-between">
-                <h3 className="text-2xl font-semibold">Parceiros cadastrados</h3>
-                <span className="text-sm text-white/50">
-                  Última atualização: hoje
-                </span>
-              </div>
-
-              <div className="overflow-hidden rounded-2xl border border-white/10">
-                <table className="w-full text-left">
-                  <thead className="bg-white/5 text-sm text-white/60">
-                    <tr>
-                      <th className="px-4 py-3">Empresa</th>
-                      <th className="px-4 py-3">Categoria</th>
-                      <th className="px-4 py-3">Países</th>
-                      <th className="px-4 py-3">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {partners.slice(0, 4).map((partner) => (
-                      <tr
-                        key={partner.id}
-                        className="border-t border-white/10 text-sm text-white/80"
-                      >
-                        <td className="px-4 py-4 font-medium">
-                          {partner.company}
-                        </td>
-                        <td className="px-4 py-4">{partner.category}</td>
-                        <td className="px-4 py-4">{partner.country}</td>
-                        <td className="px-4 py-4">
-                          <StatusBadge status={partner.status} />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-5 flex items-center justify-between">
-                <h3 className="text-2xl font-semibold">Leads recentes</h3>
-                <span className="text-sm text-white/50">Hoje</span>
-              </div>
-
-              <div className="space-y-4">
-                {leads.slice(0, 3).map((lead) => (
-                  <div
-                    key={lead.id}
-                    className="rounded-2xl border border-white/10 bg-black/30 p-4"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h4 className="text-lg font-semibold">{lead.name}</h4>
-                        <p className="text-sm text-yellow-300">{lead.partner}</p>
-                      </div>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-                        {lead.status}
-                      </span>
-                    </div>
-
-                    <p className="mt-3 text-sm leading-6 text-white/70">
-                      {lead.need}
+          <>
+            <div className="mt-8 grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
+              <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-semibold">Resumo executivo</h3>
+                    <p className="mt-1 text-sm text-white/50">
+                      Visão rápida da operação da plataforma
                     </p>
-
-                    <button
-                      onClick={() => setSelectedLead(lead)}
-                      className="mt-4 rounded-xl border border-white/10 px-4 py-2 text-sm text-white/80 transition hover:bg-white/5"
-                    >
-                      Ver detalhes
-                    </button>
                   </div>
-                ))}
+                  <span className="rounded-full border border-yellow-400/20 bg-yellow-400/10 px-3 py-1 text-xs text-yellow-300">
+                    Atualizado hoje
+                  </span>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                    <p className="text-sm text-white/50">Categoria com mais procura</p>
+                    <p className="mt-2 text-2xl font-bold text-yellow-400">
+                      Marketing / Vendas
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                    <p className="text-sm text-white/50">Parceiro com mais leads</p>
+                    <p className="mt-2 text-2xl font-bold text-yellow-400">Scalvo</p>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                    <p className="text-sm text-white/50">Taxa de aprovação</p>
+                    <p className="mt-2 text-2xl font-bold text-yellow-400">84%</p>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                    <p className="text-sm text-white/50">Tempo médio de resposta</p>
+                    <p className="mt-2 text-2xl font-bold text-yellow-400">18 min</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-semibold">Leads na semana</h3>
+                    <p className="mt-1 text-sm text-white/50">
+                      Visualização simplificada de evolução
+                    </p>
+                  </div>
+                  <span className="text-sm text-white/50">Últimos 7 dias</span>
+                </div>
+
+                <div className="flex h-[260px] items-end justify-between gap-3">
+                  {chartData.map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex flex-1 flex-col items-center justify-end"
+                    >
+                      <div className="mb-3 text-xs text-white/50">{item.value}</div>
+                      <div
+                        className="w-full rounded-t-2xl bg-gradient-to-t from-yellow-500 to-yellow-300"
+                        style={{ height: `${item.value * 10}px` }}
+                      />
+                      <div className="mt-3 text-xs text-white/50">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+
+            <div className="mt-8 grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                <div className="mb-5 flex items-center justify-between">
+                  <h3 className="text-2xl font-semibold">Parceiros cadastrados</h3>
+                  <span className="text-sm text-white/50">
+                    Última atualização: hoje
+                  </span>
+                </div>
+
+                <div className="overflow-hidden rounded-2xl border border-white/10">
+                  <table className="w-full text-left">
+                    <thead className="bg-white/5 text-sm text-white/60">
+                      <tr>
+                        <th className="px-4 py-3">Empresa</th>
+                        <th className="px-4 py-3">Categoria</th>
+                        <th className="px-4 py-3">Países</th>
+                        <th className="px-4 py-3">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {partners.slice(0, 4).map((partner) => (
+                        <tr
+                          key={partner.id}
+                          className="border-t border-white/10 text-sm text-white/80"
+                        >
+                          <td className="px-4 py-4 font-medium">
+                            {partner.company}
+                          </td>
+                          <td className="px-4 py-4">{partner.category}</td>
+                          <td className="px-4 py-4">{partner.country}</td>
+                          <td className="px-4 py-4">
+                            <StatusBadge status={partner.status} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                <div className="mb-5 flex items-center justify-between">
+                  <h3 className="text-2xl font-semibold">Leads recentes</h3>
+                  <span className="text-sm text-white/50">Hoje</span>
+                </div>
+
+                <div className="space-y-4">
+                  {leads.slice(0, 3).map((lead) => (
+                    <div
+                      key={lead.id}
+                      className="rounded-2xl border border-white/10 bg-black/30 p-4"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h4 className="text-lg font-semibold">{lead.name}</h4>
+                          <p className="text-sm text-yellow-300">{lead.partner}</p>
+                        </div>
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+                          {lead.status}
+                        </span>
+                      </div>
+
+                      <p className="mt-3 text-sm leading-6 text-white/70">
+                        {lead.need}
+                      </p>
+
+                      <button
+                        onClick={() => setSelectedLead(lead)}
+                        className="mt-4 rounded-xl border border-white/10 px-4 py-2 text-sm text-white/80 transition hover:bg-white/5"
+                      >
+                        Ver detalhes
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
         )}
 
         {tab === "partners" && (
@@ -644,13 +648,6 @@ function MetricCard({
 }) {
   return (
     <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6 shadow-2xl">
-      <p className="text-sm text-white/50">{label}</p>
-      <p className="mt-3 text-4xl font-bold text-yellow-400">{value}</p>
-    </div>
-  );
-}
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
       <p className="text-sm text-white/50">{label}</p>
       <p className="mt-3 text-4xl font-bold text-yellow-400">{value}</p>
     </div>
