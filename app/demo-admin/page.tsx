@@ -70,6 +70,15 @@ const initialLeads: Lead[] = [
 
 const initialPartners: Partner[] = [
   {
+    const chartData = [
+  { label: "Seg", value: 8 },
+  { label: "Ter", value: 12 },
+  { label: "Qua", value: 10 },
+  { label: "Qui", value: 15 },
+  { label: "Sex", value: 18 },
+  { label: "Sáb", value: 9 },
+  { label: "Dom", value: 6 },
+];
     id: 1,
     company: "Scalvo",
     category: "Marketing / Vendas",
@@ -224,14 +233,82 @@ export default function DemoAdminPage() {
           </div>
         )}
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          <MetricCard label="Parceiros aprovados" value={approvedPartners} />
-          <MetricCard label="Parceiros pendentes" value={pendingPartners} />
-          <MetricCard label="Leads em aberto" value={openLeads} />
-          <MetricCard label="Leads fechados" value={closedLeads} />
-        </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+  <MetricCard label="Parceiros aprovados" value={approvedPartners} />
+  <MetricCard label="Parceiros pendentes" value={pendingPartners} />
+  <MetricCard label="Leads em aberto" value={openLeads} />
+  <MetricCard label="Leads fechados" value={closedLeads} />
+  <MetricCard label="Pipeline estimado" value="€18.400" />
+</div>
 
         <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
+  <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6">
+    <div className="mb-6 flex items-center justify-between">
+      <div>
+        <h3 className="text-2xl font-semibold">Resumo executivo</h3>
+        <p className="mt-1 text-sm text-white/50">
+          Visão rápida da operação da plataforma
+        </p>
+      </div>
+      <span className="rounded-full border border-yellow-400/20 bg-yellow-400/10 px-3 py-1 text-xs text-yellow-300">
+        Atualizado hoje
+      </span>
+    </div>
+
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+        <p className="text-sm text-white/50">Categoria com mais procura</p>
+        <p className="mt-2 text-2xl font-bold text-yellow-400">
+          Marketing / Vendas
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+        <p className="text-sm text-white/50">Parceiro com mais leads</p>
+        <p className="mt-2 text-2xl font-bold text-yellow-400">Scalvo</p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+        <p className="text-sm text-white/50">Taxa de aprovação</p>
+        <p className="mt-2 text-2xl font-bold text-yellow-400">84%</p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+        <p className="text-sm text-white/50">Tempo médio de resposta</p>
+        <p className="mt-2 text-2xl font-bold text-yellow-400">18 min</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6">
+    <div className="mb-6 flex items-center justify-between">
+      <div>
+        <h3 className="text-2xl font-semibold">Leads na semana</h3>
+        <p className="mt-1 text-sm text-white/50">
+          Visualização simplificada de evolução
+        </p>
+      </div>
+      <span className="text-sm text-white/50">Últimos 7 dias</span>
+    </div>
+
+    <div className="flex h-[260px] items-end justify-between gap-3">
+      {chartData.map((item) => (
+        <div
+          key={item.label}
+          className="flex flex-1 flex-col items-center justify-end"
+        >
+          <div className="mb-3 text-xs text-white/50">{item.value}</div>
+          <div
+            className="w-full rounded-t-2xl bg-gradient-to-t from-yellow-500 to-yellow-300"
+            style={{ height: ${item.value * 10}px }}
+          />
+          <div className="mt-3 text-xs text-white/50">{item.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
           <TabButton
             active={tab === "overview"}
             onClick={() => setTab("overview")}
@@ -558,7 +635,20 @@ export default function DemoAdminPage() {
   );
 }
 
-function MetricCard({ label, value }: { label: string; value: number }) {
+function MetricCard({
+  label,
+  value,
+}: {
+  label: string;
+  value: number | string;
+}) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-6 shadow-2xl">
+      <p className="text-sm text-white/50">{label}</p>
+      <p className="mt-3 text-4xl font-bold text-yellow-400">{value}</p>
+    </div>
+  );
+}
   return (
     <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
       <p className="text-sm text-white/50">{label}</p>
