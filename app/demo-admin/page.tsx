@@ -157,7 +157,7 @@ export default function DemoAdminPage() {
     setLeads((prev) =>
       prev.map((lead) => (lead.id === id ? { ...lead, status } : lead))
     );
-    setMessage(`Lead atualizado para "${status}".`);
+    setMessage(`Lead atualizado para "' + status + '".`);
   }
 
   function clearMessage() {
