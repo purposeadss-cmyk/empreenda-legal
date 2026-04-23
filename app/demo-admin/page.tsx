@@ -481,7 +481,7 @@ export default function DemoAdminPage() {
                 <tbody>
                   {leads.map((lead) => (
                     <tr
-                      key={client-${lead.id}}
+                      key={`client-${lead.id}`}
                       className="border-t border-white/10 text-sm text-white/80"
                     >
                       <td className="px-4 py-4 font-medium">{lead.name}</td>
